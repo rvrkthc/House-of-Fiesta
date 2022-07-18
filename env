@@ -1,0 +1,10 @@
+SECRET_KEY=s0&#be*ss%7a$@i!woifmi8ylhqynp6jo55pzp4g3+ua@1f7b5
+DEBUG=True
+DATABASE_URL=postgres://postgres:admin123@127.0.0.1:5432/foodstoredb
+
+MEDIA_ROOT=/Users/rvrkthc/Desktop/food-store-production/media
+MEDIA_URL=/media/
+
+CLOUDINARY_CLOUD_NAME=dnub0ifnp
+CLOUDINARY_API_KEY=494322737438425
+CLOUDINARY_API_SECRET=1I5-grfRx-1B_qlDRxeJIaZ3h8Q
