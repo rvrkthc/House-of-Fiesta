@@ -1,1 +1,1 @@
-# House-of-Fiesta
+# House of Fiesta - COSC-FE2 E-COMMERCE PROJECT
