@@ -1,0 +1,205 @@
+{% extends 'store/base.html' %}
+{% load static %}
+{% load mathfilters %}
+{% load widget_tweaks %}
+{% block title %}Checkout | Food Store{% endblock %}
+{% block maincontent %}
+    <!-- catg header banner section -->
+    <section id="aa-catg-head-banner">
+        <img src="{% static 'store/img/fruit-banner.jpg' %}" alt="fashion img">
+        <div class="aa-catg-head-banner-area">
+            <div class="container">
+                <div class="aa-catg-head-banner-content">
+                    <h2>Checkout</h2>
+                    <ol class="breadcrumb">
+                        <li>
+                            <a href="{% url 'store:index' %}">Home</a>
+                        </li>
+                        <li class="active">Checkout</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- / catg header banner section -->
+    <!-- Cart view section -->
+    <section id="checkout">
+        <form method="post" action="{% url 'store:checkout' %}">
+            {% csrf_token %}
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="checkout-area">
+                            <form action="">
+                                <div class="row">
+                                    <div class="col-md-8">
+                                        <div class="checkout-left">
+                                            <h2>Billing Details</h2>
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        {{ checkout_form.billing_first_name.errors }}
+                                                        {% render_field checkout_form.billing_first_name class="form-control" placeholder='First Name*' %}
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        {{ checkout_form.billing_last_name.errors }}
+                                                        {% render_field checkout_form.billing_last_name class="form-control" placeholder='Last Name*' %}
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-12">
+                                                    <div class="form-group">
+                                                        {{ checkout_form.billing_phone.errors }}
+                                                        {% render_field checkout_form.billing_phone class="form-control" placeholder='Phone (+639)*' %}
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-12">
+                                                    <div class="form-group">
+                                                        {{ checkout_form.billing_address.errors }}
+                                                        {% render_field checkout_form.billing_address class="form-control" placeholder='Address*' %}
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        {{ checkout_form.billing_city.errors }}
+                                                        {% render_field checkout_form.billing_city class="form-control" placeholder='City*' %}
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        {{ checkout_form.billing_province.errors }}
+                                                        {% render_field checkout_form.billing_province class="form-control" placeholder='Province*' %}
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        {{ checkout_form.billing_region.errors }}
+                                                        {% render_field checkout_form.billing_region class="form-control" placeholder='Region*' %}
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        {{ checkout_form.billing_zip.errors }}
+                                                        {% render_field checkout_form.billing_zip class="form-control" placeholder='Zip Code*' %}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <h2>Shipping Details</h2>
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        {{ checkout_form.shipping_first_name.errors }}
+                                                        {% render_field checkout_form.shipping_first_name class="form-control" placeholder='First Name*' %}
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        {{ checkout_form.shipping_last_name.errors }}
+                                                        {% render_field checkout_form.shipping_last_name class="form-control" placeholder='Last Name*' %}
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-12">
+                                                    <div class="form-group">
+                                                        {{ checkout_form.shipping_phone.errors }}
+                                                        {% render_field checkout_form.shipping_phone class="form-control" placeholder='Phone (+639)*' %}
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-12">
+                                                    <div class="form-group">
+                                                        {{ checkout_form.shipping_address.errors }}
+                                                        {% render_field checkout_form.shipping_address class="form-control" placeholder='Address*' %}
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        {{ checkout_form.shipping_city.errors }}
+                                                        {% render_field checkout_form.shipping_city class="form-control" placeholder='City*' %}
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        {{ checkout_form.shipping_province.errors }}
+                                                        {% render_field checkout_form.shipping_province class="form-control" placeholder='Province*' %}
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        {{ checkout_form.shipping_region.errors }}
+                                                        {% render_field checkout_form.shipping_region class="form-control" placeholder='Region*' %}
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        {{ checkout_form.shipping_zip.errors }}
+                                                        {% render_field checkout_form.shipping_zip class="form-control" placeholder='Zip Code*' %}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="checkout-right">
+                                            <h4>Order Summary</h4>
+                                            <div class="aa-order-summary-area">
+                                                <table class="table table-responsive">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>Product</th>
+                                                            <th>Total</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        {% for stock_keeping_unit, item in cart.items %}
+                                                            <tr>
+                                                                <td>
+                                                                    {{ item.product.title }}
+                                                                    <strong>x  {{ item.quantity }}</strong>
+                                                                </td>
+                                                                <td>Php{{ item.quantity|mul:item.product.unit_price }}</td>
+                                                            </tr>
+                                                        {% endfor %}
+                                                    </tbody>
+                                                    <tfoot>
+                                                        <tr>
+                                                            <th>Subtotal</th>
+                                                            <td>Php{{ cart_subtotal }}</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th>Delivery Fee</th>
+                                                            <td>Php{{ DELIVERY_FEE }}</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th>Total</th>
+                                                            <td>Php{{ cart_total }}</td>
+                                                        </tr>
+                                                    </tfoot>
+                                                </table>
+                                            </div>
+                                            <h4>Payment Method</h4>
+                                            <div class="aa-payment-method">
+                                                <label for="cashdelivery">
+                                                    <input type="radio" id="cashdelivery" name="optionsRadios">
+                                                    Cash on Delivery
+                                                </label>
+                                                <label for="paypal">
+                                                    <input type="radio" id="paypal" name="optionsRadios" checked>
+                                                    Via Paypal
+                                                </label>
+                                                <img src="https://www.paypalobjects.com/webstatic/mktg/logo/AM_mc_vs_dc_ae.jpg"
+                                                     border="0"
+                                                     alt="PayPal Acceptance Mark">
+                                                <input type="submit" value="Place Order" class="aa-browse-btn">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </section>
+    <!-- / Cart view section -->
+{% endblock %}

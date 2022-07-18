@@ -1,0 +1,21 @@
+{% extends 'store/base.html' %}
+{% load static %}
+{% block title %}Cannot proceed | Food Store{% endblock %}
+{% block maincontent %}
+<!-- Thank you section -->
+    <section id="aa-subscribe">
+        <div class="container">
+            <div class="row">   
+                <div class="col-md-12">
+                    <div class="aa-subscribe-area">
+                        <h2>Cart is empty!</h2>
+                        <p>Your shopping cart is empty. Put in items first before checking out!</p>
+                        <a class="btn btn-primary" href="{% url 'store:products' %}">Order products</a>
+                        <a class="btn btn-danger" href="{% url 'store:index' %}">Back to homepage</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- / Thank you section -->
+{% endblock %}

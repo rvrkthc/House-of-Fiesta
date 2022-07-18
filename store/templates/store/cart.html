@@ -1,0 +1,108 @@
+{% extends 'store/base.html' %}
+{% load static %}
+{% load mathfilters %}
+{% block title %}My Cart | Food Store{% endblock %}
+{% block maincontent %}
+    <!-- catg header banner section -->
+    <section id="aa-catg-head-banner">
+        <img src="{% static 'store/img/cart-banner.jpg' %}">
+        <div class="aa-catg-head-banner-area">
+            <div class="container">
+                <div class="aa-catg-head-banner-content">
+                    <h2>Your Shopping Cart</h2>
+                    <ol class="breadcrumb">
+                        <li>
+                            <a href="index.html">Home</a>
+                        </li>
+                        <li class="active">Cart</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- / catg header banner section -->
+    <!-- Cart view section -->
+    <section id="cart-view">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="cart-view-area">
+                        <div class="cart-view-table">
+                            <form action="">
+                                <div class="table-responsive">
+                                    <table class="table">
+                                        <thead>
+                                            <tr>
+                                                <th></th>
+                                                <th></th>
+                                                <th>Product</th>
+                                                <th>Price</th>
+                                                <th>Quantity</th>
+                                                <th>Total</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {% for stock_keeping_unit, item in cart.items %}
+                                                <tr>
+                                                    <td>
+                                                        <a class="remove"
+                                                           href="{% url 'store:remove_from_cart' item.product.stock_keeping_unit %}">
+                                                            <fa class="fa fa-close"></fa>
+                                                        </a>
+                                                    </td>
+                                                    <td>
+                                                        <a href="#">
+                                                            {% if item.product.num_images > 0 %}
+                                                                <img src="{{ item.product.productimage_set.all.0.image.url }}"
+                                                                     alt="{{ item.product.title }} image" height="200px" width="200px">
+                                                            {% else %}
+                                                                <img src="{% static 'store/img/placeholder-200x200.jpg' %}"
+                                                                     alt="placeholder image" height="200px" width="200px">
+                                                            {% endif %}
+                                                        </a>
+                                                    </td>
+                                                    <td>
+                                                        <a class="aa-cart-title" href="#">{{ item.product.title }}</a>
+                                                    </td>
+                                                    <td>Php{{ item.product.unit_price }}</td>
+                                                    <td>
+                                                        {{ item.quantity }}x
+                                                        <br>
+                                                        <a href="{% url 'store:add_to_cart' item.product.stock_keeping_unit %}">Change</a>
+                                                    </td>
+                                                    <td>Php{{ item.quantity|mul:item.product.unit_price }}</td>
+                                                </tr>
+                                            {% endfor %}
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </form>
+                            <!-- Cart Total view -->
+                            <div class="cart-view-total">
+                                <h4>Cart Totals</h4>
+                                <table class="aa-totals-table">
+                                    <tbody>
+                                        <tr>
+                                            <th>Subtotal</th>
+                                            <td>Php{{ cart_subtotal }}</td>
+                                        </tr>
+                                        <tr>
+                                            <th>Delivery Fee</th>
+                                            <td>Php{{ DELIVERY_FEE }}</td>
+                                        </tr>
+                                        <tr>
+                                            <th>Total</th>
+                                            <td>Php{{ cart_total }}</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                <a href="{% url 'store:checkout' %}" class="aa-cart-view-btn">Proced to Checkout</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- / Cart view section -->
+{% endblock %}

@@ -1,0 +1,33 @@
+{% extends 'store/base.html' %}
+{% load static %}
+{% load mathfilters %}
+{% load widget_tweaks %}
+{% block title %}My Cart | Food Store{% endblock %}
+{% block maincontent %}
+    <!-- catg header banner section -->
+    <section id="aa-catg-head-banner">
+        <img src="{% static 'store/img/login-banner.jpg' %}" alt="fashion img">
+        <div class="aa-catg-head-banner-area">
+            <div class="container">
+                <div class="aa-catg-head-banner-content">
+                    <h2>Logged out</h2>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- / catg header banner section -->
+    <!-- Login section -->
+    <section id="aa-subscribe">
+        <div class="container">
+            <div class="row">   
+                <div class="col-md-12">
+                    <div class="aa-subscribe-area">
+                        <h3>Successfully logged out.</h3>
+                        <a href="{% url 'store:index' %}" class="btn btn-danger">Back to homepage</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- / Login section -->
+{% endblock %}

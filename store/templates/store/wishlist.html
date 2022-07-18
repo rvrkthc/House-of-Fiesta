@@ -1,0 +1,74 @@
+{% extends 'store/base.html' %}
+{% load static %}
+{% block title %}My Wishlist | Food Store{% endblock %}
+{% block maincontent %}
+    <!-- catg header banner section -->
+    <section id="aa-catg-head-banner">
+        <img src="{% static 'store/img/fruit-banner.jpg' %}">
+        <div class="aa-catg-head-banner-area">
+            <div class="container">
+                <div class="aa-catg-head-banner-content">
+                    <h2>Wishlist</h2>
+                    <ol class="breadcrumb">
+                        <li>
+                            <a href="{% url 'store:index' %}">Home</a>
+                        </li>
+                        <li class="active">Wishlist</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- / catg header banner section -->
+    <!-- Cart view section -->
+    <section id="cart-view">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="cart-view-area">
+                        <div class="cart-view-table aa-wishlist-table">
+                            <form action="">
+                                <div class="table-responsive">
+                                    <table class="table">
+                                        <thead>
+                                            <tr>
+                                                <th></th>
+                                                <th>Product</th>
+                                                <th>Price</th>
+                                                <th>Stock Status</th>
+                                                <th></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {% for wishlistitem in wishlistitem_list %}
+                                                <tr>
+                                                    <td>
+                                                        <a class="remove"
+                                                           href="{% url 'store:remove_from_wishlist' wishlistitem.product.stock_keeping_unit %}">
+                                                            <fa class="fa fa-close"></fa>
+                                                        </a>
+                                                    </td>
+                                                    <td>
+                                                        <a class="aa-cart-title"
+                                                           href="{% url 'store:add_to_cart' wishlistitem.product.stock_keeping_unit %}">{{ wishlistitem.product.title }}</a>
+                                                    </td>
+                                                    <td>Php{{ wishlistitem.product.unit_price }}</td>
+                                                    <td>{{ wishlistitem.product.is_in_stock|yesno:"In Stock,Unavailable" }}</td>
+                                                    <td>
+                                                        <a href="{% url 'store:add_to_cart' wishlistitem.product.stock_keeping_unit %}"
+                                                           class="aa-add-to-cart-btn">Add To Cart</a>
+                                                    </td>
+                                                </tr>
+                                            {% endfor %}
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- / Cart view section -->
+{% endblock %}

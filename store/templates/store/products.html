@@ -1,0 +1,137 @@
+{% extends 'store/base.html' %}
+{% load static %}
+{% block title %}Order now | Food Store{% endblock %}
+{% block maincontent %}
+    <!-- catg header banner section -->
+    <section id="aa-catg-head-banner">
+        <img src="{% static 'store/img/products-banner.jpg' %}"
+             alt="fashion img">
+        <div class="aa-catg-head-banner-area">
+            <div class="container">
+                <div class="aa-catg-head-banner-content">
+                    <h2>
+                        {{ selected_category|default_if_none:"All Products" }}
+                    </h2>
+                    <p style="color: #c2c2c2;">
+                        {{ selected_category.description }}
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- / catg header banner section -->
+    <!-- product category -->
+    <section id="aa-product-category">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-9 col-md-9 col-sm-8 col-md-push-3">
+                    <div class="aa-product-catg-content">
+                        <div class="aa-product-catg-body">
+                            <ul class="aa-product-catg">
+                                {% for product in product_list %}
+                                    <!-- start single product item -->
+                                    <li>
+                                        <figure>
+                                            {% if product.num_images > 0 %}
+                                            <a class="aa-product-img" href="{% url 'store:add_to_cart' product.stock_keeping_unit %}">
+                                                <img src="{{ product.productimage_set.all.0.image.url }}" alt="{{ product.title }} image" height="200px" width="200px">
+                                            </a>
+                                            {% else %}
+                                            <a class="aa-product-img" href="{% url 'store:add_to_cart' product.stock_keeping_unit %}">
+                                                <img src="{% static 'store/img/placeholder-200x200.jpg' %}" alt="{{ product.title }} image" height="200px" width="200px">
+                                            </a>
+                                            {% endif %}
+                                            <a class="aa-add-card-btn" href="{% url 'store:add_to_cart' product.stock_keeping_unit %}">
+                                                <span class="fa fa-shopping-cart"></span>
+                                                View
+                                            </a>
+                                            <figcaption>
+                                                <h4 class="aa-product-title">
+                                                    <a href="#">{{ product.title }}</a>
+                                                </h4>
+                                                <span class="aa-product-price">Php{{ product.unit_price }}</span>
+                                                <p class="aa-product-descrip">
+                                                    {{ product.body }}
+                                                </p>
+                                            </figcaption>
+                                        </figure>
+                                    </li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-3 col-sm-4 col-md-pull-9">
+                    <aside class="aa-sidebar">
+                        <!-- single sidebar -->
+                        <div class="aa-sidebar-widget">
+                            <h3>Category</h3>
+                            <ul class="aa-catg-nav">
+                                {% for category in category_list %}
+                                    <li>
+                                        <a href="{% url 'store:products' category.slug %}">{{ category.name }}</a>
+                                    </li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                        <!-- single sidebar -->
+                        <div class="aa-sidebar-widget">
+                            <h3>Recently Viewed</h3>
+                            <div class="aa-recently-views">
+                                <ul>
+                                    {% for product in recent_product_list %}
+                                        <li>
+                                            <a href="{% url 'store:add_to_cart' product.stock_keeping_unit %}" class="aa-cartbox-img">
+                                                {% if product.num_images > 0 %}
+                                                    <img src="{{ product.productimage_set.all.0.image.url }}" alt="{{ product.title }} image">
+                                                {% else %}
+                                                    <img src="{% static 'store/img/placeholder-200x200.jpg' %}" alt="placeholder image">
+                                                {% endif %}
+                                            </a>
+                                            <div class="aa-cartbox-info">
+                                                <h4>
+                                                    <a href="{% url 'store:add_to_cart' product.stock_keeping_unit %}">{{ product.title }}</a>
+                                                </h4>
+                                                <p>
+                                                    Php{{ product.unit_price }}
+                                                </p>
+                                            </div>
+                                        </li>
+                                    {% endfor %}
+                                </ul>
+                            </div>
+                        </div>
+                        <!-- single sidebar -->
+                        <div class="aa-sidebar-widget">
+                            <h3>Top Rated Products</h3>
+                            <div class="aa-recently-views">
+                                <ul>
+                                    {% for product in top_product_list %}
+                                        <li>
+                                            <a href="{% url 'store:add_to_cart' product.stock_keeping_unit %}" class="aa-cartbox-img">
+                                                {% if product.num_images > 0 %}
+                                                    <img src="{{ product.productimage_set.all.0.image.url }}" alt="{{ product.title }} image">
+                                                {% else %}
+                                                    <img src="{% static 'store/img/placeholder-200x200.jpg' %}" alt="placeholder image">
+                                                {% endif %}
+                                            </a>
+                                            <div class="aa-cartbox-info">
+                                                <h4>
+                                                    <a href="{% url 'store:add_to_cart' product.stock_keeping_unit %}">{{ product.title }}</a>
+                                                </h4>
+                                                <p>
+                                                    Php{{ product.unit_price }}
+                                                </p>
+                                            </div>
+                                        </li>
+                                    {% endfor %}
+                                </ul>
+                            </div>
+                        </div>
+                    </aside>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- / product category -->
+{% endblock %}

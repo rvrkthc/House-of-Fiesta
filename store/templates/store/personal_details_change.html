@@ -1,0 +1,53 @@
+{% extends 'store/base.html' %}
+{% load static %}
+{% load widget_tweaks %}
+{% block title %}Change personal details | Food Store{% endblock %}
+{% block maincontent %}
+    <!-- catg header banner section -->
+    <section id="aa-catg-head-banner">
+        <img src="{% static 'store/img/products-banner.jpg' %}"
+             alt="fashion img">
+        <div class="aa-catg-head-banner-area">
+            <div class="container">
+                <div class="aa-catg-head-banner-content">
+                    <h2>Your Account</h2>
+                    <ol class="breadcrumb">
+                        <li>
+                            <a href="{% url 'store:index' %}">Home</a>
+                        </li>
+                        <li class="active">Update personal details</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- / catg header banner section -->
+    <!-- product category -->
+    <section id="aa-product-category">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-9 col-md-9 col-sm-8 col-md-push-3">
+                    <div class="aa-product-catg-content" style="padding-bottom: 20px;">
+                        <h3>Change your details here.</h3>
+                        {{ form.non_field_errors }}
+                        <form method="post" action="{% url 'store:personal_details_change' %}">
+                            {% csrf_token %}
+                            {% for field in form %}
+                                <div class="form-group">
+                                    {{ field.errors }}
+                                    {{ field.label_tag }}
+                                    {% render_field field class="form-control" %}
+                                </div>
+                            {% endfor %}
+                            <button type="submit" class="btn btn-primary">Update</button>
+                        </form>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-3 col-sm-4 col-md-pull-9">
+                    {% include 'store/profile_sidebar.html' %}
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- / product category -->
+{% endblock %}
